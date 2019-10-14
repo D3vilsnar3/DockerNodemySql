@@ -4,7 +4,7 @@ services:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
-    container_name: mysqldb
+    container_name: mysql_best
     environment:
       MYSQL_ROOT_PASSWORD: govind05
 
@@ -25,4 +25,4 @@ services:
       - "8081"
     command: "npm start"
     external_links: 
-      - mysqldb:db
+      - mysql_best:db
