@@ -1,0 +1,28 @@
+version: "2"
+services:
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    container_name: mysqldb
+    environment:
+      MYSQL_ROOT_PASSWORD: govind05
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+  node:
+    image: "node:8"
+    user: "node"
+    working_dir: /home/govind/myapp
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./:/home/govind/myapp
+    expose:
+      - "8081"
+    command: "npm start"
+    external_links: 
+      - mysqldb:db
